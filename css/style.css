@@ -1,0 +1,591 @@
+body {
+    margin: 0;
+    background-color: #F6F7F8;
+    font-family: 'Inter', sans-serif;
+}
+
+body::-webkit-scrollbar {
+    width: 16px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #6C757D;
+    border-radius: 10px;
+    border: 3px solid #ffffff;
+}
+
+form::-webkit-scrollbar {
+    width: 16px;
+}
+
+form::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+form::-webkit-scrollbar-thumb {
+    background-color: #6C757D;
+    border-radius: 10px;
+    border: 3px solid #ffffff;
+}
+
+.d-none {
+    display: none !important;
+}
+
+/* Login */
+.begin {
+    height: 98vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login {
+    background-color: white;
+    height: 420px;
+    width: 570px;
+    border-radius: 15px;
+    box-shadow: -2px 0px 6px 0px rgb(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.login-headline {
+    font-size: 40px;
+    margin-bottom: 0px;
+    margin-top: 40px;
+}
+
+.sign-up-headline {
+    font-size: 40px;
+    margin-bottom: 0px;
+    margin-top: 50px;
+}
+
+.VectorImg {
+    width: 100px;
+    height: 2px;
+}
+
+.email-login input {
+    display: flex;
+    border-radius: 7px;
+    border: 1px solid #c0c0c0;
+    font-size: 18px;
+    box-sizing: border-box;
+    height: 40px;
+    width: 380px;
+    padding: 10px;
+    margin-top: 17px;
+
+}
+
+.mail-img {
+    background-image: url('../../img/mail.svg') !important;
+    background-position: 350px 8px !important;
+    background-size: 20px !important;
+    background-repeat: no-repeat !important;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 14px;
+    margin-bottom: 60px;
+}
+
+.email-login input::placeholder {
+    color: #bebcbc;
+}
+
+.password-login input {
+    display: flex;
+    border-radius: 7px;
+    border: 1px solid #c0c0c0;
+    font-size: 18px;
+    box-sizing: border-box;
+    height: 40px;
+    width: 380px;
+    padding: 10px;
+    margin-bottom: 17px;
+}
+
+.password-img {
+    background-image: url('../../img/lock.svg') !important;
+    background-position: 350px 8px !important;
+    background-size: 20px !important;
+    background-repeat: no-repeat !important;
+}
+
+.name-img {
+    background-image: url('../../img/person.svg') !important;
+    background-position: 350px 8px !important;
+    background-size: 20px !important;
+    background-repeat: no-repeat !important;
+}
+
+.password-login input::placeholder {
+    color: #bebcbc;
+}
+
+.checkbox {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    margin-top: 150px;
+}
+
+.checkbox-sign-up {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    margin-top: 310px;
+}
+
+.password {
+    color: #29ABE2;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.password:hover {
+    transform: scale(1.1);
+    text-decoration: underline;
+}
+
+.login-button {
+    border-radius: 5px;
+    width: 100px;
+    height: 42px;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #2A3647;
+    color: white;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background-color: #29ABE2;
+    box-shadow: -2px 0px 6px 0px rgb(0, 0, 0, 0.7);
+}
+
+.Guest-button {
+    position: absolute;
+    margin-bottom: -265px;
+    margin-left: 130px;
+}
+
+.Guest-button {
+    border-radius: 5px;
+    width: 160px;
+    height: 42px;
+    border: 2px solid #2A3647;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: white;
+    cursor: pointer;
+}
+
+.Guest-button:hover {
+    color: #29ABE2;
+    border-color: #29ABE2;
+    box-shadow: -2px 0px 6px 0px rgb(0, 0, 0, 0.7);
+}
+
+.SignupButton {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 75px;
+    right: 120px;
+}
+
+.SignupBtn {
+    margin-right: 20px;
+}
+
+.capaAnimation {
+    animation: background-fade 1.2s ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.capaImg {
+    transform: translate(0px, 0px);
+    animation: logoAnimation 1.8s ease-in-out;
+    position: absolute;
+    top: 70px;
+    left: 70px;
+}
+
+@keyframes logoAnimation {
+    from {
+        top: calc(100vh - 50%);
+        left: calc(100vw - 50%);
+        scale: 200%;
+    }
+
+    to {
+        top: 70px;
+        left: 70px;
+    }
+}
+
+@keyframes background-fade {
+    0% {
+        background: #ffffff;
+        z-index: 3;
+    }
+
+    99% {
+        z-index: 3;
+    }
+
+    100% {
+        background: none;
+        z-index: 1;
+    }
+}
+
+@keyframes buttonAnimation {
+    0% {
+        transform: translate(0px);
+        z-index: 5;
+    }
+
+    99% {
+        transform: translate(0px, -150px);
+        z-index: 5;
+    }
+
+    100% {
+        z-index: -5;
+    }
+}
+
+/* Login */
+
+/* Sign-up */
+.sign-up {
+    background-color: white;
+    height: 550px;
+    width: 570px;
+    border-radius: 15px;
+    box-shadow: -2px 0px 6px 0px rgb(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.arrow-img {
+    position: fixed;
+    margin-top: 60px;
+    margin-left: -150px;
+    cursor: pointer;
+}
+
+.arrow-img:hover {
+    transform: scale(1.2);
+}
+
+.d-none {
+    display: none;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    width: 100%;
+    position: absolute;
+    gap: 30px;
+    margin-top: -70px;
+    z-index: 1;
+}
+
+.footer a {
+    text-decoration: none;
+    color: #b0aeae;
+}
+
+.footer a:hover {
+    transform: scale(1.1);
+    color: #29ABE2;
+}
+
+.popup {
+    color: white;
+    background-color: rgb(42, 54, 71);
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: none;
+    transition: top 0.5s ease-in-out;
+    top: -100px;
+    z-index: 10;
+    text-align: center;
+}
+
+.error-message {
+    position: fixed;
+    top: 38vh;
+    margin-left: -135px;
+    font-size: 14px;
+    color: rgb(227, 100, 100);
+}
+
+.register-error-message {
+    position: absolute;
+    top: 46vh;
+    margin-left: -167px;
+    font-size: 14px;
+    color: rgb(227, 100, 100);
+}
+
+.register-error-message-passwort {
+    position: absolute;
+    margin-top: -5px;
+    margin-left: -170px;
+    font-size: 14px;
+    color: rgb(227, 100, 100);
+}
+
+.sign-up-privacy {
+    color: #29ABE2;
+    font-size: 15px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-left: 6px;
+    margin-bottom: 1px;
+}
+
+.sign-up-privacy:hover{
+    transform: scale(1.1);
+    text-decoration: underline;
+    
+}
+/* Sign-up */
+
+.forgot-password-container {
+    background-color: white;
+    height: 400px;
+    width: 570px;
+    border-radius: 15px;
+    box-shadow: -2px 0px 6px 0px rgb(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 2;
+}
+
+.password-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.password-btn {
+    border-radius: 5px;
+    width: 220px;
+    height: 42px;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #2A3647;
+    color: white;
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+.password-btn:hover {
+    background-color: #29ABE2;
+    box-shadow: -2px 0px 6px 0px rgb(0, 0, 0, 0.7);
+}
+
+.password-headline {
+    font-size: 40px;
+    margin-bottom: 5px;
+    margin-top: -15px;
+    padding: 0px 50px 0px 50px;
+}
+
+.password-span {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    padding: 0px 50px 0px 50px;
+}
+
+.password-arrow-img {
+    position: absolute;
+    margin-left: -260px;
+    margin-top: -10px;
+    cursor: pointer;
+}
+
+.password-arrow-img:hover {
+    transform: scale(1.2);
+}
+
+.privacy_policy a{
+    text-decoration: none;
+    color: #29ABE2;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.privacy_policy a:hover{
+    transform: scale(1.1);
+    text-decoration: underline;
+}
+
+@media (max-width: 1000px) {
+    .capaImg {
+        top: 50px;
+        left: 50px;
+        width: 50px;
+    }
+
+    @keyframes logoAnimation {
+        from {
+            top: calc(100vh - 50%);
+            left: calc(100vw - 50%);
+            scale: 200%;
+        }
+    
+        to {
+            top: 50px;
+            left: 50px;
+        }
+    }
+
+
+}
+
+@media (max-width: 600px) {
+    .SignupButton {
+        top: auto;
+        bottom: 72px;
+        left: 50%;
+        transform: translateX(-50%);
+        right: unset;
+        width: 250px;
+        gap: 20px;
+    }
+
+    .footer {
+        margin-top: -30px;
+    }
+
+    .SignupBtn {
+        margin-right: 0px;
+    }
+
+    .login {
+        height: 420px;
+        width: 420px;
+    }
+
+    .sign-up {
+        height: 550px;
+        width: 420px;
+    }
+
+    .forgot-password-container{
+        width: 420px;
+    }
+
+    .arrow-img {
+        margin-left: -60px;
+    }
+
+    .password-arrow-img{
+        margin-left: -140px;
+    }
+
+    .forgot-password-container{
+        height: 430px;
+    }
+}
+
+@media (max-width: 440px) {
+    .password-login input {
+        width: 290px;
+    }
+
+    .email-login input{
+        width: 290px;
+    }
+
+    .login {
+        height: 420px;
+        width: 320px;
+    }
+
+    .sign-up {
+        height: 550px;
+        width: 320px;
+    }
+
+    .forgot-password-container{
+        width: 320px;
+    }
+
+    .register-error-message{
+        margin-left: -80px;
+    }
+
+    .register-error-message-passwort{
+        margin-left: -80px;
+    }
+
+    .capaImg {
+        top: 25px;
+        left: 25px;
+        width: 40px;
+    }
+
+    @keyframes logoAnimation {
+        from {
+            top: calc(100vh - 50%);
+            left: calc(100vw - 50%);
+            scale: 200%;
+        }
+    
+        to {
+            top: 25px;
+            left: 25px;
+        }
+    }
+
+    .password-img {
+        background-position: 260px 8px !important;
+    }
+
+    .mail-img {
+        background-position: 260px 8px !important;
+    }
+
+    .name-img {
+        background-position: 260px 8px !important;
+    }
+}
