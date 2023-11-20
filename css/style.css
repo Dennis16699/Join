@@ -589,3 +589,17 @@ form::-webkit-scrollbar-thumb {
         background-position: 260px 8px !important;
     }
 }
+
+@media (max-width: 380px) {
+    .capaImg {
+        display: none;
+    }
+
+    @keyframes logoAnimation {
+        from {
+            top: calc(100vh - 50%);
+            left: calc(100vw - 50%);
+            scale: 200%;
+        }
+    }
+}

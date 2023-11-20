@@ -79,10 +79,6 @@ body {
     transform: scale(1.1);
 }
 
-.sidebarLogo:hover{
-    cursor: pointer;
-    transform: scale(1.1);
-}
 
 @media (max-width: 950px) {
     .sidebar {
