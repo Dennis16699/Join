@@ -88,7 +88,7 @@ form::-webkit-scrollbar-thumb {
 }
 
 .mail-img {
-    background-image: url('../../img/mail.svg') !important;
+    background-image: url('../img/mail.svg') !important;
     background-position: 350px 8px !important;
     background-size: 20px !important;
     background-repeat: no-repeat !important;
@@ -119,14 +119,14 @@ form::-webkit-scrollbar-thumb {
 }
 
 .password-img {
-    background-image: url('../../img/lock.svg') !important;
+    background-image: url('../img/lock.svg') !important;
     background-position: 350px 8px !important;
     background-size: 20px !important;
     background-repeat: no-repeat !important;
 }
 
 .name-img {
-    background-image: url('../../img/person.svg') !important;
+    background-image: url('../img/person.svg') !important;
     background-position: 350px 8px !important;
     background-size: 20px !important;
     background-repeat: no-repeat !important;
@@ -181,7 +181,7 @@ form::-webkit-scrollbar-thumb {
 
 .Guest-button {
     position: absolute;
-    margin-bottom: -265px;
+    margin-bottom: -273px;
     margin-left: 130px;
 }
 
