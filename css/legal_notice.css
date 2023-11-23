@@ -46,6 +46,10 @@
     .help-header{
         margin: 0px 0px 130px 50px;
     }
+
+    .sidebar{
+        display: none !important;
+    }
 }
 
 @media (max-width: 650px){
