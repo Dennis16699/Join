@@ -2,7 +2,7 @@
 let draggedElement;
 
 function createBoardTasks(id, category, headline, text, priority_img) {
-    return `<div onclick="loadBoardCard(${id})" id="${id}" draggable="true" ondragstart="startDragging(${id})" class="board_fbc board_note" >
+    return /*html*/`<div onclick="loadBoardCard(${id})" id="${id}" draggable="true" ondragstart="startDragging(${id})" class="board_fbc board_note" >
         <div class="board_task_headline" style="background-color: ${category.color};">${category.text}
         </div>
         <div class="board_task_header">${headline}
@@ -29,13 +29,13 @@ function createBoardTasks(id, category, headline, text, priority_img) {
 }
 
 function createBoardUsers(color, name) {
-    return `
+    return /*html*/`
     <div class="board_task_name board_fbcc" style="background: ${color};">${name}
     </div>`;
 }
 
 function createBoardSubtasks(taskcompleted, taskall, percent) {
-    return `
+    return /*html*/`
     <div class="board_task_progess_empty">
         <div id="progress-bar-25" class="board_task_progess" role="progressbar" aria-valuenow="75"
         aria-valuemin="0" aria-valuemax="100" style="width: ${percent}%;">
@@ -48,7 +48,7 @@ function createBoardSubtasks(taskcompleted, taskall, percent) {
 
 
 function createBoradCard(id, story, story_bg, headline, text, date, priority, priority_img) {
-    return `
+    return /*html*/`
     <div class="board_detail_box board_fbcc" onclick="closeBoardCard()" >
     <div id="board_detail_card" class="board_detail_card" onclick="notClose(event), closeAssignedToField()">
         <div class="board_fbsbc">
@@ -108,7 +108,7 @@ function createBoradCard(id, story, story_bg, headline, text, date, priority, pr
 }
 
 function createBoardCardUsers(first_name, user, color) {
-    return `
+    return /*html*/`
     <div class="board_dfcb" style="margin-top: 20px;margin-left: 25px;">
     <div class="board_task_name board_fbcc" style="background: ${color};">${user}
     </div>
@@ -117,7 +117,7 @@ function createBoardCardUsers(first_name, user, color) {
 }
 
 function createBoardCardSubtaks(id, i, status, text, img) {
-    return `
+    return /*html*/`
     <div id="completed${id}-${i}" class=" board_detail_subtasks board_dfcb" style="margin-top: 20px;margin-left: 5px;">
     <img onclick="toggelSubtaskCompleted(${id},${i},${status})" class="board_fbcc" src="${img}" alt="">
     <span>${text}</span>

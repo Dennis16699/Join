@@ -33,7 +33,6 @@ async function saveNewContact() {
     } else {
         updateContactsPage(contactNameAlterd);
     };
-
     showPopup('Contact succesfully created');
 }
 
