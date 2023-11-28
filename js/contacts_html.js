@@ -69,7 +69,7 @@ function createPopupContact() {
                             <img src="../img/mail.svg" alt="" />
                         </div>
                         <div class="contacts-input-con">
-                            <input type="tel" name="phone" id="popup-contact-phone" placeholder="Phone" class="contacts-input"/>
+                            <input required type="tel" name="phone" id="popup-contact-phone" placeholder="Phone" class="contacts-input"/>
                             <img src="../img/add_call.svg" alt="" />
                         </div>
                         <div id="popup-contact-button-con" class="contacts-button-con">
@@ -91,5 +91,5 @@ function createPopupExistContactIcon(i) {
 function createPopupExistContactBt(i) {
     return /*html*/`
         <input type="button" value="Delete" id="contacts-bt-delet" onclick="deleteContacts(${i})" class="contacts-button contacts-bt-delet contacts-bt-ft">
-        <input type="button" value="Save" id="contacts-bt-change" onclick="saveChangedContact(${i})" class="contacts-button contacts-bt-create contacts-bt-ft contacts-bt-check">`;
+        <input type="button" value="Save" id="contacts-bt-change" onclick="checkFormFields(${i})" class="contacts-button contacts-bt-create contacts-bt-ft contacts-bt-check">`;
 }

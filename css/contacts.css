@@ -335,6 +335,7 @@
     display: flex;
     flex-direction: column;
     gap: 32px;
+    z-index: 1;
 }
 
 .contacts-input-con {

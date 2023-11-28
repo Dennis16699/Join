@@ -229,6 +229,20 @@ async function saveChangedContact(i) {
     }
 }
 
+function checkFormFields(i) {
+    var name = document.getElementById('popup-contact-name').value;
+    var email = document.getElementById('popup-contact-email').value;
+    var phone = document.getElementById('popup-contact-phone').value;
+
+    if (name === '' || email === '' || phone === '') {
+        // Mindestens eines der Felder ist nicht ausgefüllt
+        showPopup('Please fill in all fields.');
+    } else {
+        // Alle Felder sind ausgefüllt, daher kann die gewünschte Aktion ausgeführt werden
+        saveChangedContact(i); // Hier rufe ich die saveChangedContact-Funktion mit dem Wert von "i" auf
+    }
+}
+
 /**
  * This functin calls all the functions to save the changes.
  */

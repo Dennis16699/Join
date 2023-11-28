@@ -199,21 +199,6 @@ function setTaskPrio(prio) {
     
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /**
  * This function sets the color to the according prio.
  * 

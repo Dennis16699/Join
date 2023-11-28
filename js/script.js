@@ -19,12 +19,6 @@ function toggleCheckmark(elementId, elementIdNone) {
     }
 }
 
-
-
-
-
-
-
 //Bin noch dabei es weiter zu machen
 function checkSite(){
     if(window.location.pathname.split('/').pop() == 'board.html'){
@@ -39,11 +33,7 @@ function checkSite(){
       document.getElementById("legal").style.backgroundColor = "#091931";
     }
   }
-
-
-
-
-
+  
 /**
  * Toggles the visibility of the signup and login sections.
  * @param {string} action - Determines the action to take, either "show" or "hide".
