@@ -19,6 +19,31 @@ function toggleCheckmark(elementId, elementIdNone) {
     }
 }
 
+
+
+
+
+
+
+//Bin noch dabei es weiter zu machen
+function checkSite(){
+    if(window.location.pathname.split('/').pop() == 'board.html'){
+      document.getElementById("board").style.backgroundColor = "#091931";
+    }else if(window.location.pathname.split('/').pop() == 'summary.html'){
+      document.getElementById("summary").style.backgroundColor = "#091931";
+    }else if(window.location.pathname.split('/').pop() == 'add_task.html'){
+      document.getElementById("add_task").style.backgroundColor = "#091931";
+    } else if(window.location.pathname.split('/').pop() == 'contacts.html'){
+      document.getElementById("contacts").style.backgroundColor = "#091931";
+    } else if(window.location.pathname.split('/').pop() == 'legal.html'){
+      document.getElementById("legal").style.backgroundColor = "#091931";
+    }
+  }
+
+
+
+
+
 /**
  * Toggles the visibility of the signup and login sections.
  * @param {string} action - Determines the action to take, either "show" or "hide".
@@ -46,7 +71,7 @@ function showForgotPassword(mode) {
     } else if (mode === 'reset') {
         document.getElementById('password-container').classList.remove('d-none');
         document.getElementById('forgot-password-container').classList.add('d-none');
-        
+
     }
 }
 
@@ -59,9 +84,9 @@ function handleForgotPasswordFormSubmit() {
 
     document.getElementById('forgot-password-container').classList.add('d-none');
     document.getElementById('password-container').classList.remove('d-none');
-    
+
     showPopupAndRedirect('Passwort erfolgreich zurückgesetzt', 'index.html');
-    
+
     return false;
 }
 
@@ -82,12 +107,12 @@ function validatePasswords() {
     const password2 = document.getElementById('ForgotPassword2').value;
     const errorMessage = document.getElementById('register-error2');
     if (password1 !== password2) {
-        
+
         showPopup('Your password does not match.')
         return false; // Verhindert das Absenden des Formulars
     } else {
         errorMessage.style.display = 'none';
-         // Hier wird das Passwort zurückgesetzt
+        // Hier wird das Passwort zurückgesetzt
         return true; // Lässt das Formular absenden
     }
 }

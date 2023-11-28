@@ -591,8 +591,21 @@ form::-webkit-scrollbar-thumb {
 }
 
 @media (max-width: 380px) {
-    .capaImg {
-        display: none;
+    .sign-up {
+        height: 480px;
+        width: 320px;
+    }
+
+    .sign-up-headline {
+        margin-top: 145px;
+    }
+
+    .arrow-img {
+        margin-top: 160px;
+    }
+
+    .login-button-media{
+        margin-bottom: 95px;
     }
 
     @keyframes logoAnimation {

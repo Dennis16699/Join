@@ -3,9 +3,9 @@
 let letters = [];       // Variable (renderContacts()) to render contacts list letters
 let allContacts = [];       // Variable for function createContact()
 let hexColors = ['#FF7A00', '#9327FF', '#6E52FF', '#FC71FF', '#FFBB2B', '#1FD7C1', '#462F8A', '#FF4646',
-              '#FF9633', '#8B45FF', '#7C82FF', '#FF8DFC', '#FFD345', '#2DE9D7', '#5C47A6', '#FF7E7E',
-              '#FFA64E', '#AD63FF', '#9DA8FF', '#FF9AFD', '#FFE14D', '#4EEBCF', '#6B5BC1', '#FF6666',
-              '#FFC074', '#C685FF', '#B6C4FF', '#FFB6FE', '#FFF47E', '#62F3E5'];   // Variable for contact icon
+    '#FF9633', '#8B45FF', '#7C82FF', '#FF8DFC', '#FFD345', '#2DE9D7', '#5C47A6', '#FF7E7E',
+    '#FFA64E', '#AD63FF', '#9DA8FF', '#FF9AFD', '#FFE14D', '#4EEBCF', '#6B5BC1', '#FF6666',
+    '#FFC074', '#C685FF', '#B6C4FF', '#FFB6FE', '#FFF47E', '#62F3E5'];   // Variable for contact icon
 
 
 // show contacts list on the side
@@ -19,6 +19,7 @@ async function initContacts() {
     loadFromLocalStorage();
     loadFromLocalStorageContacts();
     renderContacts();
+    applyPermanentHoverEffect();
 }
 
 /**
@@ -26,22 +27,23 @@ async function initContacts() {
  */
 
 function renderContacts() {
-    if(contacts) {
-    let contactsList = document.getElementById('contacts-list');
-    contactsList.innerHTML = "";
-    letters = [];
-    sortContactsList();
+    if (contacts) {
+        let contactsList = document.getElementById('contacts-list');
+        contactsList.innerHTML = "";
+        letters = [];
+        sortContactsList();
 
-    for (let i = 0; i < contacts.length; i++) {
-        const contact = contacts[i];
-        let firstCha = contact['logogram'].charAt(0);
-        let myData = "";
-        checkContactsListLetter(firstCha, contactsList);
-        if(user === contact['email']){
-            myData = "(me)";
-        } 
-        renderContactsHTML(contactsList, i, contact, myData);
-    }}
+        for (let i = 0; i < contacts.length; i++) {
+            const contact = contacts[i];
+            let firstCha = contact['logogram'].charAt(0);
+            let myData = "";
+            checkContactsListLetter(firstCha, contactsList);
+            if (user === contact['email']) {
+                myData = "(me)";
+            }
+            renderContactsHTML(contactsList, i, contact, myData);
+        }
+    }
 }
 
 
@@ -50,8 +52,8 @@ function renderContacts() {
  */
 
 function sortContactsList() {
-    contacts = contacts.sort((a,b) => {
-        if(a.name < b.name) {
+    contacts = contacts.sort((a, b) => {
+        if (a.name < b.name) {
             return -1;
         }
     })
@@ -62,9 +64,9 @@ function sortContactsList() {
  *  by adding the first letter in a alphabetically order between the contacts */
 
 function checkContactsListLetter(firstCha, contactsList) {
-    if(!letters.includes(firstCha)) {
-    letters.push(firstCha);
-    renderContactsListLetters(firstCha, contactsList);
+    if (!letters.includes(firstCha)) {
+        letters.push(firstCha);
+        renderContactsListLetters(firstCha, contactsList);
     }
 }
 
@@ -93,7 +95,28 @@ function renderContactsHTML(contactsList, i, contact, myData) {
     return contactsList.innerHTML += createContactsHTML(i, contact, myData);
 }
 
+function applyPermanentHoverEffect() {
+    const contactDivs = document.querySelectorAll('.contacts-list-sgl-con');
 
+    contactDivs.forEach(div => {
+        div.addEventListener('click', function() {
+            contactDivs.forEach(removeHoverEffect);
+            this.style.backgroundColor = '#091931';
+            const nameElement = this.querySelector('.contact-name');
+            if (nameElement) {
+                nameElement.style.color = 'white';
+            }
+        });
+    });
+}
+
+function removeHoverEffect(div) {
+    div.style.backgroundColor = '';
+    const nameElement = div.querySelector('.contact-name');
+    if (nameElement) {
+        nameElement.style.color = '';
+    }
+}
 
 // show clicked contact on the main page
 
@@ -109,8 +132,8 @@ function showContact(i) {
     clickedContact.innerHTML = "";
 
     if (window.matchMedia("(max-width: 700px)").matches) {
-    document.getElementById('contacts-main').classList.remove('d-none-700');
-    document.getElementById('contacts-list-section').classList.add('d-none');
+        document.getElementById('contacts-main').classList.remove('d-none-700');
+        document.getElementById('contacts-list-section').classList.add('d-none');
     }
     renderSglContactHTML(i, contact, clickedContact);
 }
@@ -124,7 +147,7 @@ function showContact(i) {
  */
 
 function renderSglContactHTML(i, contact, clickedContact) {
-        clickedContact.innerHTML = createSglContactHTML(i, contact);
+    clickedContact.innerHTML = createSglContactHTML(i, contact);
 }
 
 /**
@@ -136,13 +159,13 @@ function backToContactsList() {
     document.getElementById('contacts-list-section').classList.remove('d-none');
 }
 
-window.addEventListener("resize", function() {
+window.addEventListener("resize", function () {
     if (window.matchMedia("(min-width: 701px)").matches && document.URL.includes("contacts.html")) {
-    document.getElementById('contacts-list-section').classList.remove('d-none');
-  } 
+        document.getElementById('contacts-list-section').classList.remove('d-none');
+    }
     if (window.matchMedia("(max-width: 700px)").matches && document.URL.includes("contacts.html")) {
-    document.getElementById('contacts-main').classList.add('d-none-700');
-  } 
+        document.getElementById('contacts-main').classList.add('d-none-700');
+    }
 })
 
 
@@ -160,7 +183,7 @@ window.addEventListener("resize", function() {
 function showPopupContact(filter) {
     renderPopupContact();
     let filterPlusOne = filter + 1;
-    if(filterPlusOne){
+    if (filterPlusOne) {
         showPopupExistContact(filter);
     }
     showPopupContactContainer();
@@ -230,7 +253,7 @@ function showPopupExistContact(i) {
     document.getElementById('popup-contact-p').innerHTML = "";
     document.getElementById('popuo-contact-user-icon').innerHTML = createPopupExistContactIcon(i);
     document.getElementById('popup-contact-name').value = `${contacts[i]['name']}`;
-    document.getElementById('popup-contact-email').value = `${contacts[i]['email']}`; 
-    document.getElementById('popup-contact-phone').value = `${contacts[i]['phone']}`; 
+    document.getElementById('popup-contact-email').value = `${contacts[i]['email']}`;
+    document.getElementById('popup-contact-phone').value = `${contacts[i]['phone']}`;
     document.getElementById('popup-contact-button-con').innerHTML = createPopupExistContactBt(i);
 }

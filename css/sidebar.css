@@ -54,14 +54,8 @@ body {
 }
 
 .sidebarBtn:hover {
-    background-color: #091931;
+    background-color: #2A3D59;
 }
-
-/*
-.sidebarBtnActive {
-    background: #091931;
-}
-*/
 
 .sidebarPrivacy {
     display: flex;

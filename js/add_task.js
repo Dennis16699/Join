@@ -196,7 +196,23 @@ function setTaskPrio(prio) {
     taskPrio = prio;
 
     setPrioButtonColor(prio);
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * This function sets the color to the according prio.
@@ -375,109 +391,4 @@ function changeBoardStyle(subButton, cardStroy, formContainer) {
         document.getElementById('task-input-left').style.width = '100%';
         document.getElementById('task-input-right').style.width = '100%';
         document.getElementById('task-hr').classList.add('d-none');
-}
-
-/**
- * This function gets the tasks index 
- * 
- * @param {number} id This variable is the assigned id of the task
- * @returns The index of the task within the list array
- */
-
-function getIndexTaskEdit(id) {
-        for (let i = 0; i < list.length; i++) {
-            const task = list[i];
-            if(id == task['id']) {
-                return i;
-            }
-        };
-}
-
-/**
- * This function saves the subtasks in the global array subtasks
- * 
- * @param {object} task 
- */
-
-function saveSubtasksListEdit(task) {
-        subtasks = [];
-        let taskSubtasks = task['subtasks'];
-        for (let j = 0; j < taskSubtasks.length; j++) {
-            const subtask = taskSubtasks[j];
-                subtasks.push(subtask);
-        }
-}
-
-/**
- * 
- * @param {number} id This variable is the assigned id of the task
- * @param {number} i This variable is the task index in the list array
- */
-
-async function changeTask(id, i) {
-    let taskTitle = document.getElementById('task-title');
-    let taskDescription = document.getElementById('task-description');
-    let assignedTo = getAssignedToUsersEditTask(i);
-    let dueDate = document.getElementById('task-date');
-    let taskCategory = getTaskCategory(); 
-    let taskBoard = list[i]['task_board'];
-
-    await saveChangedTask(id, i, taskTitle.value, taskDescription.value, assignedTo, dueDate.value, taskCategory, taskBoard);
-    closeBoardCard();
-    showPopup('Task changed');
-    loadTaskBoard();
-}
-
-/**
- * This function saves the values within the variable changedTask and replaces the old task
- * with the new inside the list array. Than everything is saved in localStorage and on the server agian.
- * 
- * @param {number} id This variable is the assigned id of the task
- * @param {number} i This variable is the task index in the list array
- * @param {string} taskTitle This variable is the task title
- * @param {string} taskDescription This variable is the task text
- * @param {object} assignedTo This variable is the task assigned users in an object
- * @param {string} dueDate This variable is the due date
- * @param {object} taskCategory This varibale is the category the task is assigned to
- * @param {string} taskBoard This varibale is the category for the board fields
- */
-
-async function saveChangedTask(id, i, taskTitle, taskDescription, assignedTo, dueDate, taskCategory, taskBoard) {
-        let changedTask = {
-        'id':id,
-        'headline': taskTitle,
-        'text': taskDescription,
-        'task_user': assignedTo,
-        'date': dueDate,
-        'priority': taskPrio,
-        'category': taskCategory,
-        'subtasks': subtasks,
-        'task_board': taskBoard,
-    }
-
-    list.splice(i, 1, changedTask);
-    await SaveInLocalStorageAndServer(user, listString, list);
-}
-
-/**
- * This function gets the assigned to users by either the checkbox input or
- * if it wasn't changed, by the saved values inside the task object.
- * 
- * @param {number} i This variable is the task index in the list array
- * @returns A object with the assigned to users
- */
-
-function getAssignedToUsersEditTask(i) {
-    let assignedToUser = getAssignedToUsers(); 
-    let assignedTo = [];
-    if(assignedToUser.length === 0) {
-        let taskUsers = list[i]['task_user']
-        for (let j = 0; j < taskUsers.length; j++) {
-            const sglContacts = taskUsers[j];
-            assignedTo.push(sglContacts);
-        }
-        return assignedTo;
-    } else {
-        return assignedToUser;
-    }
 }
