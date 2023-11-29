@@ -1,4 +1,11 @@
-function createAddTask() {
+/**
+ * Creates the layout for adding a task
+ * 
+ * @param {date} todayDate  today's date
+ * @returns layout
+ */
+
+function createAddTask(todayDate) {
   return /*html*/`
             <div id="task-input-left" class="task-input-left">
               <label class="task-label"><span>Title<span class="task-star">*</span></span>
@@ -12,9 +19,8 @@ function createAddTask() {
               </label>
               <label class="task-label">Assigned to
                 <div class="task-assigned-to-con">
-                  <input type="button" value="Select contacts to assign" 
-                  onclick="stopClosing(event), showAssignedToBt()" 
-                  class="task-sub-input-con task-assigned-to"/>
+                  <input id='serchAssitUserValue' type="text" onkeyup='serchAssitUser()' onclick="stopClosing(event), showAssignedToBt()" 
+                  class="task-sub-input-con task-assigned-to" placeholder="Select contacts to assign"/>
                   <div class="task-assigned-to-sub">
                     <div onclick="stopClosing(event)" id="task-contacts-list-to-assign" 
                     class="d-none task-contacts-list-to-assign"></div>
@@ -25,13 +31,14 @@ function createAddTask() {
                     </button>
                   </div>
                 </div>
+                <div id='add-task-assist' class='add-task-assist'></div>
               </label>
             </div>
             <div id="task-hr" class="task-hr"></div>
             <div id="task-input-right" class="task-input-right">
               <label class="task-label"><span>Due date<span class="task-star">*</span></span>
-                <input required class="task-input-fd" type="date" name="dd/mm/yyyy" id="task-date"
-                placeholder="dd/mm/yyyy"
+                <input required class="task-input-fd" type="date" name="dd/mm/yyyy" id="task-date" 
+                placeholder="dd/mm/yyyy" min='${todayDate}'
                 />
               </label>
               <label class="task-label">Prio
@@ -67,11 +74,11 @@ function createAddTask() {
                       minlength="1"/>
                     <div class="flx task-sub-icons">
                       <div onclick="deleteInputText()" class="flx">
-                        <img src="/img/Close.svg" alt="" />
+                        <img src="../img/Close.svg" alt="" />
                       </div>
                       <div class="task-sub-hr"></div>
                       <div onclick="saveInputText()" class="flx">
-                        <img class="task-sub-input-img" src="/img/task_check_bl.svg" alt="" />
+                        <img class="task-sub-input-img" src="../img/task_check_bl.svg" alt="" />
                       </div>
                     </div>
                   </div>
@@ -81,28 +88,42 @@ function createAddTask() {
             </div>`;
 }
 
-
-function createAssignedToBt(i, contact) {
+/**
+ * Creates the contact
+ * 
+ * @param {Number} i index for contact
+ * @param {array} subtask contact
+ * @returns return contact
+ */
+function createAssignedToBt(i, contact, checked) {
   return /*html*/`
             <div class="task-contacts-list-to-assign-sub">
                 <div class="flex-just-btw-ct">
                     <div style="background-color:${contact['hex_color']};" class="task-contacts-color-icon">${contact['logogram']}</div>
                     <label for="contact-${i}">${contact['name']}</label>
                 </div>
-                <input type="checkbox" name="contact" id="contact-${i}" value="${contact['name']}">
+                <div id='contact-assit-update-${i}'>
+                <input onclick='checkedAssist(${i})' type="checkbox" name="contact" id="contact-${i}" value="${contact['name']}" ${checked}>
+                </div>
             </div>`;
 }
 
-
+/**
+ * Creates the texts for the subtask
+ * 
+ * @param {Number} i index for subtask
+ * @param {array} subtask subtask content
+ * @returns return layout
+ */
 function createInputText(i, subtask) {
   return /*html*/`
         <div id="subtask-field-${i}" class="d-none flex-just-btw-ct">
             <input id="subtask-input-field-${i}" type="text" class="task-sub-input" minlength="1"/>
             <div class="flex-just-btw-ct task-sub-text-sgl-icons">
-                <div onclick="deleteSubtask(${i})" class="task-sub-text-sgl-icons-con"><img src="/img/delete.svg" alt=""/></div>
+                <div onclick="deleteSubtask(${i})" class="task-sub-text-sgl-icons-con"><img src="../img/delete.svg" alt=""/></div>
                 <div class="task-sub-hr"></div>
                 <div onclick="saveEditedSubtask(${i})" class="task-sub-text-sgl-icons-con"><img 
-                    src="/img/task_check_bl.svg" alt=""/>
+                    src="../img/task_check_bl.svg" alt=""/>
                 </div>
             </div>
         </div>
@@ -111,9 +132,9 @@ function createInputText(i, subtask) {
                 ${subtask['text']}
             </li>
             <div class="flex-just-btw-ct task-sub-text-sgl-icons">                        
-                <div onclick="editSubtask(${i})" class="task-sub-text-sgl-icons-con"><img src="/img/edit.svg" alt=""/></div>
+                <div onclick="editSubtask(${i})" class="task-sub-text-sgl-icons-con"><img src="../img/edit.svg" alt=""/></div>
                 <div class="task-sub-hr"></div>
-                <div onclick="deleteSubtask(${i})" class="task-sub-text-sgl-icons-con"><img src="/img/delete.svg" alt=""/></div>
+                <div onclick="deleteSubtask(${i})" class="task-sub-text-sgl-icons-con"><img src="../img/delete.svg" alt=""/></div>
             </div>
         </div>`;
 }

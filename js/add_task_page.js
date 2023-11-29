@@ -1,39 +1,32 @@
-// Add Task page functionality
-
 /**
  * This function starts the functions to load all the necessary data
  */
-
 async function initAddTask() {
     loadAddTaskForm();
     await loadUserData();
+    checkUserLogin();
     loadFromLocalStorage();
     loadFromLocalStorageContacts();
     loadStringFromLocalStorage();
-    disablePastDates();
-
 }
 
-
-// Load Add Task Form Element
-
+/**
+ * Load Add Task Form Element
+ */
 function loadAddTaskForm() {
     let AddTaskForm = document.getElementById('task-input-con');
     AddTaskForm.innerHTML = "";
-    AddTaskForm.innerHTML = createAddTask();
+    let todayDate = getCurrentDate();
+    AddTaskForm.innerHTML = createAddTask(todayDate);
 }
-
-//  Assigned To Field - render Contacts list 
 
 /**
  * This function handles the appearance of the assigned to Button
  */
-
 function showAssignedToBt() {
     document.getElementById('task-contacts-list-to-assign').classList.remove('d-none');
     document.getElementById('add-new-contact-bt').classList.remove('d-none');
-    let contactsListToAssignCon = document.getElementById('task-contacts-list-to-assign');
-
+    contactsListToAssignCon = document.getElementById('task-contacts-list-to-assign');
     if (!contacts) {
         contactsListToAssignCon.innerHTML = "";
         contactsListToAssignCon.innerHTML = /*html*/`<p>&emsp; No contacts yet</p>`;
@@ -45,34 +38,91 @@ function showAssignedToBt() {
 
 /**
  * This function generates the html code for the assigned to Button with all the saved contacts.
+ * 
+ * @param {string} serch serch assit user 
  */
-
-function renderAssignedToBt() {
+function renderAssignedToBt(serch) {
     let contactsListToAssignCon = document.getElementById('task-contacts-list-to-assign');
     contactsListToAssignCon.innerHTML = "";
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
-
-        contactsListToAssignCon.innerHTML += createAssignedToBt(i, contact);
+        if (contact.name.toLowerCase().includes(serch) || serch == undefined) {
+            if (contact.check) {
+                contactsListToAssignCon.innerHTML += createAssignedToBt(i, contact, 'checked');
+            } else {
+                contactsListToAssignCon.innerHTML += createAssignedToBt(i, contact, '');
+            }
+        }
     }
 }
 
-function disablePastDates() {
-    var today = new Date().toISOString().split('T')[0];
-    document.getElementById('task-date').min = today;
+/**
+ * This function looks for the assit users
+ */
+function serchAssitUser() {
+    let serchValue = document.getElementById('serchAssitUserValue').value;
+    serchValue = serchValue.toLowerCase();
+    renderAssignedToBt(serchValue);
+}
+
+/**
+ * This function determines the checked of the individual Assist users
+ * 
+ * @param {number} i index of assist user
+ */
+function checkedAssist(i) {
+    for (let j = 0; j < contacts.length; j++) {
+        const element = contacts[j];
+        if (i == j) {
+            if (document.getElementById(`contact-${i}`).checked && document.getElementById(`task-assist-${element.email}`) == null) {
+                element.check = 'checked';
+                document.getElementById('add-task-assist').innerHTML += `
+                    <div id='task-assist-${element.email}' style="background-color:${element['hex_color']};" class="task-contacts-color-icon-assist">${element['logogram']} </div>`
+            } else if (document.getElementById(`contact-${i}`).checked && document.getElementById(`task-assist-${element.email}`) != null) {
+                document.getElementById(`task-assist-${element.email}`).classList.remove('dn');
+                element.check = 'checked';
+            } else
+                if (document.getElementById('add-task-assist')) {
+                    element.check = '';
+                    document.getElementById(`task-assist-${element.email}`).classList.add('dn');
+                }
+        }
+    }
+    renderAssignedToBt();
+}
+
+/**
+ * This function checks the assit users that have already been set
+ * 
+ * @param {number} i index ob task 
+ */
+function loadCheckedAssist(i) {
+    if(user == 'guest') return
+    document.getElementById('add-task-assist').innerHTML = '';
+    let counterAssistUser = 0;
+    for (let h = 0; h < list[i]['task_user'].length; h++) {
+        const element = list[i]['task_user'][h];
+        for (let k = 0; k < contacts.length; k++) {
+            const contact = contacts[k];
+            if (element.mail == contact.email) {
+                    document.getElementById('add-task-assist').innerHTML += `
+                    <div id='task-assist-${contact.email}' style="background-color:${element['color']};" class="task-contacts-color-icon-assist">${element['name']}
+                    </div>`
+                    contact.check = 'checked';
+            }
+        }
+    }
 }
 
 /**
  * This function closes the container with all the contacts listed.
  */
-
 function closeAssignedToField() {
     let listOfContactsToAssigne = document.getElementById('task-contacts-list-to-assign');
     if (listOfContactsToAssigne) {
         listOfContactsToAssigne.classList.add('d-none');
         document.getElementById('add-new-contact-bt').classList.add('d-none');
-
-        // showAssignedToIcons();
+        document.getElementById('serchAssitUserValue').value = '';
     }
 }
 
@@ -81,17 +131,14 @@ function closeAssignedToField() {
  * 
  * @param {*} event 
  */
-
 function stopClosing(event) {
+
     event.stopPropagation();
 }
-
-// subtask input field
 
 /**
  * This function opens the subtext input by clicking on the subtask Button.
  */
-
 function changeToSubText() {
     let subtaskButtonOpen = document.getElementById('task-sub-bt-open');
     subtaskButtonOpen.classList.add('d-none');
@@ -102,7 +149,6 @@ function changeToSubText() {
 /**
  * This function deletes the input value.
  */
-
 function deleteInputText() {
     document.getElementById('task-sub-input-text').value = "";
 }
@@ -110,7 +156,6 @@ function deleteInputText() {
 /**
  * This function saves the input value as an object in newSubtask and than within the array subtasks.
  */
-
 function saveInputText() {
     let subtaskInput = document.getElementById('task-sub-input-text');
 
@@ -127,14 +172,11 @@ function saveInputText() {
 /**
  * The new subtask within the subtasks array is generated under the subtask Button
  */
-
 function renderInputText() {
     let subtaskTextCon = document.getElementById('task-sub-text');
     subtaskTextCon.innerHTML = "";
-
     for (let i = 0; i < subtasks.length; i++) {
         const subtask = subtasks[i];
-
         subtaskTextCon.innerHTML += createInputText(i, subtask);
     }
 }
@@ -145,10 +187,8 @@ function renderInputText() {
  * 
  * @param {number} i This is the index of the subtask
  */
-
 function deleteSubtask(i) {
     subtasks.splice(i, 1);
-
     renderInputText();
 }
 
@@ -157,7 +197,6 @@ function deleteSubtask(i) {
  * 
  * @param {number} i This is the index of the subtask
  */
-
 function editSubtask(i) {
     document.getElementById(`subtask-field-${i}`).classList.remove('d-none');
     document.getElementById(`subtask-li-${i}`).classList.add('d-none');
@@ -174,115 +213,20 @@ function editSubtask(i) {
 function saveEditedSubtask(i) {
     let subtaskInputField = document.getElementById(`subtask-input-field-${i}`);
     subtasks[i]['text'] = subtaskInputField.value;
-
     document.getElementById(`subtask-field-${i}`).classList.add('d-none');
     document.getElementById(`subtask-li-${i}`).classList.remove('d-none');
-
     renderInputText();
 }
 
-
 /**
- * This function gets the tasks index 
+ * This function determines today's date and returns it formatted
  * 
- * @param {number} id This variable is the assigned id of the task
- * @returns The index of the task within the list array
+ * @returns todayDate
  */
-
-function getIndexTaskEdit(id) {
-    for (let i = 0; i < list.length; i++) {
-        const task = list[i];
-        if (id == task['id']) {
-            return i;
-        }
-    };
-}
-
-/**
-* This function saves the subtasks in the global array subtasks
-* 
-* @param {object} task 
-*/
-
-function saveSubtasksListEdit(task) {
-    subtasks = [];
-    let taskSubtasks = task['subtasks'];
-    for (let j = 0; j < taskSubtasks.length; j++) {
-        const subtask = taskSubtasks[j];
-        subtasks.push(subtask);
-    }
-}
-
-/**
-* 
-* @param {number} id This variable is the assigned id of the task
-* @param {number} i This variable is the task index in the list array
-*/
-
-async function changeTask(id, i) {
-    let taskTitle = document.getElementById('task-title');
-    let taskDescription = document.getElementById('task-description');
-    let assignedTo = getAssignedToUsersEditTask(i);
-    let dueDate = document.getElementById('task-date');
-    let taskCategory = getTaskCategory();
-    let taskBoard = list[i]['task_board'];
-
-    await saveChangedTask(id, i, taskTitle.value, taskDescription.value, assignedTo, dueDate.value, taskCategory, taskBoard);
-    closeBoardCard();
-    showPopup('Task changed');
-    loadTaskBoard();
-}
-
-/**
-* This function saves the values within the variable changedTask and replaces the old task
-* with the new inside the list array. Than everything is saved in localStorage and on the server agian.
-* 
-* @param {number} id This variable is the assigned id of the task
-* @param {number} i This variable is the task index in the list array
-* @param {string} taskTitle This variable is the task title
-* @param {string} taskDescription This variable is the task text
-* @param {object} assignedTo This variable is the task assigned users in an object
-* @param {string} dueDate This variable is the due date
-* @param {object} taskCategory This varibale is the category the task is assigned to
-* @param {string} taskBoard This varibale is the category for the board fields
-*/
-
-async function saveChangedTask(id, i, taskTitle, taskDescription, assignedTo, dueDate, taskCategory, taskBoard) {
-    let changedTask = {
-        'id': id,
-        'headline': taskTitle,
-        'text': taskDescription,
-        'task_user': assignedTo,
-        'date': dueDate,
-        'priority': taskPrio,
-        'category': taskCategory,
-        'subtasks': subtasks,
-        'task_board': taskBoard,
-    }
-
-    list.splice(i, 1, changedTask);
-    await SaveInLocalStorageAndServer(user, listString, list);
-}
-
-/**
-* This function gets the assigned to users by either the checkbox input or
-* if it wasn't changed, by the saved values inside the task object.
-* 
-* @param {number} i This variable is the task index in the list array
-* @returns A object with the assigned to users
-*/
-
-function getAssignedToUsersEditTask(i) {
-    let assignedToUser = getAssignedToUsers();
-    let assignedTo = [];
-    if (assignedToUser.length === 0) {
-        let taskUsers = list[i]['task_user']
-        for (let j = 0; j < taskUsers.length; j++) {
-            const sglContacts = taskUsers[j];
-            assignedTo.push(sglContacts);
-        }
-        return assignedTo;
-    } else {
-        return assignedToUser;
-    }
+function getCurrentDate() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
 }

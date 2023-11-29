@@ -21,12 +21,12 @@ let toDoPos;                //Calculated position from the task
 let inProgressPos;          //Calculated position from the task
 let awaitFeedbackPos;       //Calculated position from the task
 let donePos;                //Calculated position from the task
+let ist_position;           //set value ist_position
 
 
 /**
  * This function starts the initialization of the tocu function
  */
-
 function loadTouch() {
     task = document.querySelectorAll('.board_note');
     toDo = document.querySelector('.board_to_do');
@@ -53,7 +53,7 @@ function addStart(elem) {
         calcPositionTasks();
         let startX = e.changedTouches[0].clientX;
         let startY = e.changedTouches[0].clientY;
-        touchMove(elem,startX,startY);
+        touchMove(elem, startX, startY);
         touchEnd(elem);
     });
 }
@@ -68,18 +68,18 @@ function addStart(elem) {
  * @param {Number} startY   Y position of the touch object
  */
 
-function touchMove(elem,startX,startY){
+function touchMove(elem, startX, startY) {
     elem.addEventListener('touchmove', eve => {
-            eve.preventDefault();
-            autoSrcoll(elem.getBoundingClientRect().top);
-            let nextX = eve.changedTouches[0].clientX;
-            let nextY = eve.changedTouches[0].clientY;
-            elem.style.left = nextX - startX + 'px';
-            elem.style.top = nextY - startY + 'px';
-            ist_position = window.scrollY + elem.getBoundingClientRect().top;
-            touchElementStyle(elem);
-            touchHighlight();
-        });
+        eve.preventDefault();
+        autoSrcoll(elem.getBoundingClientRect().top);
+        let nextX = eve.changedTouches[0].clientX;
+        let nextY = eve.changedTouches[0].clientY;
+        elem.style.left = nextX - startX + 'px';
+        elem.style.top = nextY - startY + 'px';
+        ist_position = window.scrollY + elem.getBoundingClientRect().top;
+        touchElementStyle(elem);
+        touchHighlight();
+    });
 }
 
 
@@ -89,13 +89,12 @@ function touchMove(elem,startX,startY){
  * @param {String} elem element of the touch object
  */
 
-function touchEnd(elem){
+function touchEnd(elem) {
     elem.addEventListener('touchend', eve => {
             checkTouchEnd(elem);
-            SaveInLocalStorageAndServer(user, 'list', list);
-            loadTaskBoard();
-            console.log(elem)
-        });
+        SaveInLocalStorageAndServer(user, 'list', list);
+        loadTaskBoard();
+    });
 }
 
 
@@ -104,12 +103,12 @@ function touchEnd(elem){
  * 
  * @param {String} elem element of the touch object
  */
-function  touchElementStyle(elem){
-            elem.style.border = '1px solid black';
-            elem.style.opacity = '0.9';
-            elem.style.zIndex = 10;
-            elem.style.position = 'absolute';
-            elem.style.overflow = 'hidden';
+function touchElementStyle(elem) {
+    elem.style.border = '1px solid black';
+    elem.style.opacity = '0.9';
+    elem.style.zIndex = 10;
+    elem.style.position = 'absolute';
+    elem.style.overflow = 'hidden';
 }
 
 /**
@@ -217,7 +216,6 @@ function calcPositionTasks() {
  * @param {Number} index Index for the element that is moved
  */
 function calcPositionTasksToDo(index) {
-    console.log('hier')
     if (counter[index] == 0) {
         toDo_top = distance_top;
         toDo_buttom = distance_top + empty_box;
@@ -311,15 +309,12 @@ function autoSrcoll(position) {
     let distance = 200;
     let window_height = window.innerHeight - distance;
     if (position <= distance && window.scrollY >= 0) {
-        console.log('oben')
         Y = window.scrollY - 50;
-        //console.warn('top', window.scrollY);
         scrollTo(0, Y);
     }
     if (position >= window_height && window.scrollY <= window_height) {
-        console.log('unten')
+
         Y = window.scrollY + 50;
-        // console.warn('buttom', window.scrollY);
         scrollTo(0, Y);
     }
     return scrollY;

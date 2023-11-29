@@ -1,15 +1,17 @@
+body {
+    overflow: hidden;
+}
+
 .board_body {
     position: absolute;
     left: 232px;
     right: 0;
     top: 100px;
-    margin-left: 50px;
-    margin-right: 50px;
+    overflow: hidden;
 }
 
 .board_fixed {
     position: fixed;
-    right: 16px;
 }
 
 .board_p {
@@ -97,6 +99,7 @@ h1 {
     position: relative;
     width: 280px;
     min-height: 35em;
+
 }
 
 .board_box {
@@ -116,8 +119,9 @@ h1 {
 
 .board_header {
     position: relative;
-    width: 100%;
     background-color: #F6F7F8;
+    margin-left: 5%;
+    margin-right: calc(5% + 16px);
 }
 
 .board_button_add_task {
@@ -299,6 +303,7 @@ h1 {
 
 .board_task_name_box {
     margin-left: 10px;
+    max-width: 170px;
 }
 
 .board_task_name {
@@ -344,13 +349,12 @@ h1 {
     width: 100%;
     height: 100vh;
     z-index: 5;
-
 }
 
 .board_detail_card {
     position: relative;
     max-width: 525px;
-    max-height: 700px;
+    max-height: calc(100vh - 300px);
     background-color: white;
     padding: 40px;
     border-radius: 30px;
@@ -358,6 +362,8 @@ h1 {
     margin: 10px;
     overflow: auto;
     width: 100%;
+    z-index: 5;
+    transition: all 0.5s;
 }
 
 .board_detail_card img:hover {
@@ -365,14 +371,18 @@ h1 {
 }
 
 .board_detail_card::-webkit-scrollbar {
+    padding-top: 50px;
     width: 16px;
 }
 
 .board_detail_card::-webkit-scrollbar-track {
+     margin-top: 25px;
+     margin-bottom: 25px;
     background: transparent;
 }
 
 .board_detail_card::-webkit-scrollbar-thumb {
+    
     margin-right: 10px;
     background-color: #6C757D;
     border-radius: 10px;
@@ -380,11 +390,13 @@ h1 {
 }
 
 .board_detail_card::-webkit-scrollbar-button:vertical:decrement {
+    
     border-bottom-left-radius: 8.5px;
     border-bottom-right-radius: 8.5px;
 }
 
 .board_detail_card::-webkit-scrollbar-button:vertical:increment {
+   
     border-top-left-radius: 8.5px;
     border-top-right-radius: 8.5px;
 }
@@ -406,6 +418,7 @@ h1 {
     text-align: left;
     color: black;
     background-color: blue;
+    transition: all 0.5s;
 }
 
 .board_detail_headline {
@@ -417,6 +430,7 @@ h1 {
     letter-spacing: 0em;
     text-align: left;
     color: rgba(0, 0, 0, 1);
+    transition: all 0.5s;
 }
 
 
@@ -429,6 +443,7 @@ h1 {
     letter-spacing: 0em;
     text-align: left;
     color: rgba(0, 0, 0, 1);
+    transition: all 0.5s;
 }
 
 .board_detail_date_prio {
@@ -495,6 +510,50 @@ h1 {
     height: 100%;
 }
 
+.board_columns_fixed_small {
+    overflow-y: scroll;
+    max-height: calc(100vh - 260px);
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+
+.board_columns_fixed_small::-webkit-scrollbar {
+    width: 16px;
+}
+
+.board_columns_fixed_small::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.board_columns_fixed_small::-webkit-scrollbar-thumb {
+    background-color: #6C757D;
+    border-radius: 10px;
+    border: 3px solid #ffffff;
+}
+
+.board_columns_fixed::-webkit-scrollbar {
+    width: 16px;
+}
+
+.board_columns_fixed::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.board_columns_fixed::-webkit-scrollbar-thumb {
+    background-color: #6C757D;
+    border-radius: 10px;
+    border: 3px solid #ffffff;
+}
+
+.board_edit_task {
+    overflow-y: scroll;
+    height: 60vh;
+    bottom: 140px;
+    top: 96px;
+    width: 100%;
+    overflow-x: hidden;
+}
 
 @media (max-width: 1000px) {
 
@@ -508,6 +567,7 @@ h1 {
     .board_header {
         justify-content: space-around;
         flex-direction: column;
+
     }
 
     .board_serch {
@@ -559,12 +619,10 @@ h1 {
 @media (max-width: 950px) {
 
     .board_body {
-        
+
         left: 0px;
         right: 0;
         top: 100px;
-        margin-left: 50px;
-        margin-right: 50px;
     }
 
     .board_columns_fixed {
@@ -573,6 +631,7 @@ h1 {
 
     .board_detail_card {
         max-width: 392px;
+        transition: all 0.5s;
     }
 
     .board_detail_header {
@@ -586,6 +645,7 @@ h1 {
         line-height: 19px;
         letter-spacing: 0em;
         text-align: left;
+        transition: all 0.5s;
     }
 
     .board_detail_headline {
@@ -595,6 +655,7 @@ h1 {
         line-height: 43px;
         letter-spacing: 0em;
         text-align: left;
+        transition: all 0.5s;
     }
 
     .board_detail_text {
@@ -604,6 +665,7 @@ h1 {
         line-height: 19px;
         letter-spacing: 0em;
         text-align: left;
+        transition: all 0.5s;
     }
 
     .board_detail_date_prio {
@@ -645,7 +707,20 @@ h1 {
     }
 }
 
+@media (max-width: 886px) {
+    .board_columns_fixed_small {
+        max-height: calc(100vh - 400px);
+    }
+}
+
 @media (max-width: 660px) {
+    body {
+        overflow: auto;
+    }
+
+    .board_header {
+        margin-right: 5%;
+    }
 
     h1 {
         font-family: Inter;
@@ -656,10 +731,7 @@ h1 {
         text-align: left;
     }
 
-    .board_body {
-        margin-left: 15px;
-        margin-right: 15px;
-    }
+
 
     .board_button_add_task_small {
         width: 40px;
@@ -671,6 +743,12 @@ h1 {
     .board_columns_fixed {
         min-height: auto;
         width: 100%;
+        margin-right: calc(5% + 16px);
+
+    }
+
+    .board_columns_fixed_scroll {
+        overflow-x: scroll;
     }
 
     .board_columns {
@@ -684,7 +762,7 @@ h1 {
         justify-content: flex-start;
         align-items: flex-start;
         flex-direction: initial;
-        overflow-x: overlay;
+        overflow-x: none;
         scrollbar-width: auto;
         scrollbar-color: #6C757D #ffffff;
     }
@@ -706,8 +784,13 @@ h1 {
 
     .board_columns_fixed_small {
         flex-direction: column;
-        width: 100%;
         margin-bottom: 90px;
+        overflow: hidden;
+        max-height: fit-content;
+        padding: 0;
+        margin-left: 5%;
+        margin-right: 5%;
+
     }
 
     .board_note {
@@ -730,16 +813,25 @@ h1 {
 }
 
 @media (max-width: 500px) {
-.board_columns_fixed_small{
-    position: relative;
-}
+
+
+    .board_columns_fixed_small {
+        position: relative;
+    }
+
+
+    .board_edit_task {
+        overflow:unset;
+        height: 100%;
+
+    }
 
     .board_detail_box {
         position: fixed;
         top: 96px;
-        background-color: rgba(42, 54, 71, 0.2);
+        background-color: white;
         width: 100%;
-        z-index: 5;
+        z-index: 0;
         bottom: 90px;
         height: auto;
     }
@@ -758,6 +850,7 @@ h1 {
         right: 0;
         max-width: 100%;
         padding: 15px;
+        transition: all 0.5s;
     }
 
     .board_detail_del_edit {
@@ -773,8 +866,20 @@ h1 {
         position: fixed;
         top: 113px;
         right: 30px;
+        background-color: #6c757d42;
+        height: 30px;
+        width: auto;
+        padding: 3px;
+        border-radius: 15px;
+        z-index: 5;
     }
-    .board_detail_date_prio{
+
+    .board_detail_fixed_close:hover {
+        background-color: #6c757d7e;
+        cursor: pointer;
+    }
+
+    .board_detail_date_prio {
         margin-bottom: 40px;
     }
 }
