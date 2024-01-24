@@ -13,10 +13,11 @@
   <link rel="stylesheet" href="../css/header.css" />
   <link rel="stylesheet" href="../css/sidebar.css" />
   <link rel="stylesheet" href="../css/contacts.css" />
-
   <script src="../js/includeHTML.js"></script>
   <script src="../js/storage.js"></script>
   <script src="../js/script.js"></script>
+  <script src="../js/board_template.js"></script>
+  <script src="../js/board.js"></script>
   <script src="../js/add_task.js"></script>
   <script src="../js/add_task_page.js"></script>
   <script src="../js/add_task_html.js"></script>
@@ -25,13 +26,14 @@
   <script src="../js/contacts_html.js"></script>
 </head>
 
-<body onload="includeHTML(), initAddTask()">
-  <div w3-include-html="/templates/header.html"></div>
-  <div w3-include-html="/templates/sidebar.html"></div>
+<body onload="includeHTML(); initAddTask()">
+  <div w3-include-html="../templates/header.html"></div>
+  <div w3-include-html="../templates/sidebar.html"></div>
+  <div w3-include-html="../templates/landscape.html"></div>
   <div id="contacts-add-bg" class="contacts-add-bg d-none" onclick="closeNewContacts()"></div>
   <main onclick="closeAssignedToField()" class="task-body">
     <form class="task-form" onsubmit="createNewTask(); return false">
-      <div>
+      <div class="task-form-box">
         <h2 class="task-h2">Add Task</h2>
         <div id="task-input-con" class="task-input-con"></div>
       </div>

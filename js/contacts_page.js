@@ -13,26 +13,24 @@ let hexColors = ['#FF7A00', '#9327FF', '#6E52FF', '#FC71FF', '#FFBB2B', '#1FD7C1
 /**
  * This function starts all the necessary functions to run the contacts.html
  */
-
 async function initContacts() {
     await loadUserData();
+    checkUserLogin();
     loadFromLocalStorage();
     loadFromLocalStorageContacts();
     renderContacts();
-    applyPermanentHoverEffect();
+    createHeaderName();
 }
 
 /**
  * This function starts all the functions to generate the contact list on the left side of the page
  */
-
 function renderContacts() {
     if (contacts) {
         let contactsList = document.getElementById('contacts-list');
         contactsList.innerHTML = "";
         letters = [];
         sortContactsList();
-
         for (let i = 0; i < contacts.length; i++) {
             const contact = contacts[i];
             let firstCha = contact['logogram'].charAt(0);
@@ -50,7 +48,6 @@ function renderContacts() {
 /**
  * This function sorts the elements in the contacts array alphabetically
  */
-
 function sortContactsList() {
     contacts = contacts.sort((a, b) => {
         if (a.name < b.name) {
@@ -62,7 +59,6 @@ function sortContactsList() {
 /** 
  * This function creates the subdivision of the generated contact list on the page
  *  by adding the first letter in a alphabetically order between the contacts */
-
 function checkContactsListLetter(firstCha, contactsList) {
     if (!letters.includes(firstCha)) {
         letters.push(firstCha);
@@ -77,7 +73,6 @@ function checkContactsListLetter(firstCha, contactsList) {
  * @param {*} contactsList This variable is the container where all the contacts are generated in
  * @returns It returns the html code for the divison within the contacts list
  */
-
 function renderContactsListLetters(firstCha, contactsList) {
     return contactsList.innerHTML += createContactsListLetters(firstCha);
 }
@@ -90,33 +85,11 @@ function renderContactsListLetters(firstCha, contactsList) {
  * @param {object} contact This variable is the current contact form the contacts array
  * @returns It returns the html code
  */
-
 function renderContactsHTML(contactsList, i, contact, myData) {
     return contactsList.innerHTML += createContactsHTML(i, contact, myData);
 }
 
-function applyPermanentHoverEffect() {
-    const contactDivs = document.querySelectorAll('.contacts-list-sgl-con');
 
-    contactDivs.forEach(div => {
-        div.addEventListener('click', function() {
-            contactDivs.forEach(removeHoverEffect);
-            this.style.backgroundColor = '#091931';
-            const nameElement = this.querySelector('.contact-name');
-            if (nameElement) {
-                nameElement.style.color = 'white';
-            }
-        });
-    });
-}
-
-function removeHoverEffect(div) {
-    div.style.backgroundColor = '';
-    const nameElement = div.querySelector('.contact-name');
-    if (nameElement) {
-        nameElement.style.color = '';
-    }
-}
 
 // show clicked contact on the main page
 
@@ -125,18 +98,27 @@ function removeHoverEffect(div) {
  * 
  * @param {number} i This is the index of the current contact
  */
-
 function showContact(i) {
+    clearHighlight();
     let contact = contacts[i];
     let clickedContact = document.getElementById('contact-clicked');
     clickedContact.innerHTML = "";
-
+    document.getElementById(`contact-con-${i}`).classList.add('contact-highlight');
     if (window.matchMedia("(max-width: 700px)").matches) {
         document.getElementById('contacts-main').classList.remove('d-none-700');
         document.getElementById('contacts-list-section').classList.add('d-none');
     }
     renderSglContactHTML(i, contact, clickedContact);
 }
+
+
+function clearHighlight() {
+    for (let i = 0; i < contacts.length; i++) {
+
+        document.getElementById(`contact-con-${i}`).classList.remove('contact-highlight');
+    }
+}
+
 
 /**
  * This function creates the html code to show the clicked contact.
@@ -145,7 +127,6 @@ function showContact(i) {
  * @param {object} contact This variable is the clicked contact
  * @param {*} clickedContact This variable is the container where the contact will be generated
  */
-
 function renderSglContactHTML(i, contact, clickedContact) {
     clickedContact.innerHTML = createSglContactHTML(i, contact);
 }
@@ -153,7 +134,6 @@ function renderSglContactHTML(i, contact, clickedContact) {
 /**
  * This function is used to show or hide the clicked contact, depending on the window size of the page.
  */
-
 function backToContactsList() {
     document.getElementById('contacts-main').classList.add('d-none-700');
     document.getElementById('contacts-list-section').classList.remove('d-none');
@@ -168,8 +148,6 @@ window.addEventListener("resize", function () {
     }
 })
 
-
-
 // Button + PopUp (For Add new contacts)
 
 /**
@@ -179,7 +157,6 @@ window.addEventListener("resize", function () {
  * @param {number} filter This varible is the index of the contact. If it is empty, the function to 
  * create new contacts is being called.
  */
-
 function showPopupContact(filter) {
     renderPopupContact();
     let filterPlusOne = filter + 1;
@@ -192,7 +169,6 @@ function showPopupContact(filter) {
 /**
  * This function generates the html code for the popup window to create a new contact
  */
-
 function renderPopupContact() {
     let addNewContactsPopup = document.getElementById('contacts-add-bg');
     addNewContactsPopup.innerHTML = createPopupContact();
@@ -201,7 +177,6 @@ function renderPopupContact() {
 /**
  * This function is responsible to show the popup background
  */
-
 function showPopupContactContainer() {
     document.getElementById('contacts-add-bg').classList.remove('d-none');
     setTimeout(showPopupContactContent, 0)
@@ -210,7 +185,6 @@ function showPopupContactContainer() {
 /**
  * This function is responsible to show the popup window
  */
-
 function showPopupContactContent() {
     document.getElementById('contacts-add-con').classList.add('contacts-add-con-show');
 }
@@ -218,7 +192,6 @@ function showPopupContactContent() {
 /**
  * This function closes the popup window
  */
-
 function closeNewContacts() {
     let overlayBg = document.getElementById('contacts-add-bg');
     overlayBg.classList.add('d-none');
@@ -232,12 +205,9 @@ function closeNewContacts() {
  * 
  * @param {*} event 
  */
-
 function stopClosing(event) {
     event.stopPropagation();
 }
-
-
 
 //  Button + PopUp (Change existing contact)
 
@@ -247,7 +217,6 @@ function stopClosing(event) {
  * 
  * @param {number} i This variable is the index of the clicked contact
  */
-
 function showPopupExistContact(i) {
     document.getElementById('popup-contact-header').innerHTML = "Edit contact";
     document.getElementById('popup-contact-p').innerHTML = "";

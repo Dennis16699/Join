@@ -2,9 +2,10 @@
  * This function initializes the board page
  */
 async function initBoard() {
-    loadUserData();
+    await loadUserData();
     checkUserLogin();
     loadTaskBoard();
+    createHeaderName();
 }
 
 /**
@@ -68,8 +69,14 @@ function loadBoardUsers(id, task_user) {
     for (let i = 0; i < task_user.length; i++) {
         const element = task_user[i];
         let task_user_number = `task_user${id}`;
-        document.getElementById(task_user_number).innerHTML += createBoardUsers(element.color, element.name);
-    };
+        if (i < 3) {
+            document.getElementById(task_user_number).innerHTML += createBoardUsers(element.color, element.name);
+        } else if (task_user.length-1 == i) {
+            counter = task_user.length - 3;
+            namecounter = '+' + counter;
+            document.getElementById(task_user_number).innerHTML += createBoardUsers('#2A3647', namecounter)
+        }
+    }
 }
 
 /**
@@ -121,7 +128,7 @@ function allowDrop(event) {
 function moveTo(category) {
     list[draggedElement]['task_board'] = category;
     SaveInLocalStorageAndServer(user, 'list', list);
-    initBoard();
+    loadTaskBoard();
 }
 
 /**
@@ -217,10 +224,13 @@ function deleteTask(id) {
     }
 }
 
+/**
+ * Creates a popup when saving as a guest
+ */
 function addGuestTask() {
-        if (user == 'guest') {
-            showPopup('Cannot be deleted as a guest. Please create an account')
-        }
+    if (user == 'guest') {
+        showPopup('Cannot be deleted as a guest. Please create an account')
+    }
 }
 
 /**

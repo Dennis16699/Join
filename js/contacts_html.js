@@ -1,3 +1,9 @@
+/**
+ * This function creates the letters view
+ * 
+ * @param {*} firstCha 
+ * @returns return firstCha
+ */
 function createContactsListLetters(firstCha) {
     return /*html*/`
         <div>
@@ -6,7 +12,14 @@ function createContactsListLetters(firstCha) {
         </div>`;
 }
 
-
+/**
+ * This function creates the layout for contacting you
+ * 
+ * @param {number} i 
+ * @param {string} contact 
+ * @param {string} myData 
+ * @returns return contact layout
+ */
 function createContactsHTML(i, contact, myData) {
     return /*html*/`
             <div id="contact-con-${i}" class="contacts-list-sgl-con" onclick="showContact(${i})">
@@ -18,7 +31,13 @@ function createContactsHTML(i, contact, myData) {
             </div>`;
 }
 
-
+/**
+ * This function creates the individual contact
+ * 
+ * @param {number} i 
+ * @param {string} contact 
+ * @returns return singeln contact
+ */
 function createSglContactHTML(i, contact) {
     return /*html*/`
         <div id="contact-con-${i}" class="flx-col">
@@ -37,13 +56,19 @@ function createSglContactHTML(i, contact) {
                 <h4 class="contact-h4">Email</h4>
                 <a href="mailto:${contact['email']}" class="contact-email" id="email-${i}">${contact['email']}</a>
                 <h4 class="contact-h4">Phone</h4>
-                <div class="contact-phone" id="phone-${i}">${contact['phone']}</div>
+                <div class="contact-phone" id="phone-${i}">
+                <a href="tel:${contact['phone']}">${contact['phone']}</a>
+            </div>
             </div>
         </div>
     `
 }
 
-
+/**
+ * This function creates the individual as a popup
+ * 
+ * @returns return popup contact
+ */
 function createPopupContact() {
     return /*html*/`
         <div id="contacts-add-con" class="contacts-add-con" onclick="stopClosing(event)">
@@ -59,7 +84,7 @@ function createPopupContact() {
                     <div id="popuo-contact-user-icon">
                         <img src="../img/contacts-user-logo.svg" alt="" class="contacts-user-logo"/>
                     </div>
-                    <form onsubmit="createNewContact(); return false;" class="contacts-form">
+                    <form onsubmit="createNewContact(); return false;" class="contacts-form" id='check-formvalidation-contacts'>
                         <div class="contacts-input-con">
                             <input required type="text" name="name" id="popup-contact-name" placeholder="Name" class="contacts-input"/>
                             <img src="../img/person.svg" alt="" />
@@ -69,7 +94,7 @@ function createPopupContact() {
                             <img src="../img/mail.svg" alt="" />
                         </div>
                         <div class="contacts-input-con">
-                            <input required type="tel" name="phone" id="popup-contact-phone" placeholder="Phone" class="contacts-input"/>
+                            <input type='tel' pattern="[0-9]{0,15}" class="contacts-input" id="popup-contact-phone" placeholder="Phone" title='Phone Number (Format: 0-9)'>
                             <img src="../img/add_call.svg" alt="" />
                         </div>
                         <div id="popup-contact-button-con" class="contacts-button-con">
@@ -82,14 +107,25 @@ function createPopupContact() {
         </div>`;
 }
 
-
+/**
+ * This function creates the contact exextiret already icon
+ * 
+ * @param {number} i 
+ * @returns return popup exist icon
+ */
 function createPopupExistContactIcon(i) {
     return /*html*/`
         <div style="background-color:${contacts[i]['hex_color']};" class="contacts-color-icon contacts-user-logo contacts-user-popup">${contacts[i]['logogram']}</div>`;
 }
 
+/**
+ * This function creates the contact exextiret already button
+ * 
+ * @param {number} i 
+ * @returns return popup exist button
+ */
 function createPopupExistContactBt(i) {
     return /*html*/`
         <input type="button" value="Delete" id="contacts-bt-delet" onclick="deleteContacts(${i})" class="contacts-button contacts-bt-delet contacts-bt-ft">
-        <input type="button" value="Save" id="contacts-bt-change" onclick="checkFormFields(${i})" class="contacts-button contacts-bt-create contacts-bt-ft contacts-bt-check">`;
+        <input type="button" value="Save" id="contacts-bt-change" onclick="saveChangedContact(${i})" class="contacts-button contacts-bt-create contacts-bt-ft contacts-bt-check">`;
 }

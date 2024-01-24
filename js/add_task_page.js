@@ -8,6 +8,7 @@ async function initAddTask() {
     loadFromLocalStorage();
     loadFromLocalStorageContacts();
     loadStringFromLocalStorage();
+    createHeaderName();
 }
 
 /**

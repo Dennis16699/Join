@@ -54,8 +54,14 @@ body {
 }
 
 .sidebarBtn:hover {
-    background-color: #2A3D59;
+    background-color: #091931;
 }
+
+/*
+.sidebarBtnActive {
+    background: #091931;
+}
+*/
 
 .sidebarPrivacy {
     display: flex;
@@ -73,6 +79,10 @@ body {
     transform: scale(1.1);
 }
 
+.sidebarLogo:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
 
 @media (max-width: 950px) {
     .sidebar {

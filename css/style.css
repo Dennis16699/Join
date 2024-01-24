@@ -36,6 +36,13 @@ form::-webkit-scrollbar-thumb {
     display: none !important;
 }
 
+.landscape-stop{
+    position: relative;
+    height: 100vh;
+width: 100%;
+z-index: 100;
+}
+
 /* Login */
 .begin {
     height: 98vh;
@@ -46,7 +53,7 @@ form::-webkit-scrollbar-thumb {
 
 .login {
     background-color: white;
-    height: 420px;
+    height: fit-content;
     width: 570px;
     border-radius: 15px;
     box-shadow: -2px 0px 6px 0px rgb(0, 0, 0, 0.2);
@@ -55,18 +62,22 @@ form::-webkit-scrollbar-thumb {
     justify-content: center;
     align-items: center;
     z-index: 2;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    transition: all 0.5s;
+
 }
 
 .login-headline {
     font-size: 40px;
     margin-bottom: 0px;
-    margin-top: 40px;
+    margin-top: 0px;
 }
 
 .sign-up-headline {
     font-size: 40px;
     margin-bottom: 0px;
-    margin-top: 50px;
+    margin-top: 12px;
 }
 
 .VectorImg {
@@ -84,43 +95,41 @@ form::-webkit-scrollbar-thumb {
     width: 380px;
     padding: 10px;
     margin-top: 17px;
-
 }
 
 .mail-img {
     background-image: url('../img/mail.svg') !important;
-    background-position: 350px 8px !important;
+    background-position: calc(100% - 5px) 8px !important;
     background-size: 20px !important;
     background-repeat: no-repeat !important;
 }
 
 .form {
     display: flex;
+    justify-content: center;
     flex-direction: column;
     align-items: center;
-    margin-top: 14px;
-    margin-bottom: 60px;
 }
 
 .email-login input::placeholder {
     color: #bebcbc;
 }
 
-.password-login input {
+.header-icon {
     display: flex;
-    border-radius: 7px;
-    border: 1px solid #c0c0c0;
-    font-size: 18px;
-    box-sizing: border-box;
-    height: 40px;
-    width: 380px;
-    padding: 10px;
-    margin-bottom: 17px;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    border-radius: 100%;
+    color: white;
+    border: 2px solid black;
+    height: 30px;
+    width: 30px;
 }
 
 .password-img {
     background-image: url('../img/lock.svg') !important;
-    background-position: 350px 8px !important;
+    background-position: calc(100% - 5px) 8px !important;
     background-size: 20px !important;
     background-repeat: no-repeat !important;
 }
@@ -137,23 +146,26 @@ form::-webkit-scrollbar-thumb {
 }
 
 .checkbox {
-    position: absolute;
+    margin-top: 15px;
+    margin-bottom: 15px;
     display: flex;
     align-items: center;
-    margin-top: 150px;
+    justify-content: center;
+    width: 100%;
 }
 
 .checkbox-sign-up {
     position: absolute;
     display: flex;
     align-items: center;
-    margin-top: 310px;
+    margin-top: 300px;
 }
 
 .password {
     color: #29ABE2;
     font-size: 15px;
     cursor: pointer;
+    margin-left: 40px;
 }
 
 .password:hover {
@@ -163,15 +175,18 @@ form::-webkit-scrollbar-thumb {
 
 .login-button {
     border-radius: 5px;
-    width: 100px;
-    height: 42px;
+    width: fit-content;
+    height: 43px;
     border: none;
     font-size: 20px;
     font-weight: bold;
     background-color: #2A3647;
     color: white;
-    margin-right: 10px;
     cursor: pointer;
+    margin-right: 5px;
+    transition: all 0.5s;
+    padding-left: 25px;
+    padding-right: 25px;
 }
 
 .login-button:hover {
@@ -179,10 +194,13 @@ form::-webkit-scrollbar-thumb {
     box-shadow: -2px 0px 6px 0px rgb(0, 0, 0, 0.7);
 }
 
-.Guest-button {
-    position: absolute;
-    margin-bottom: -273px;
-    margin-left: 130px;
+.login-box {
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    transition: all 0.5s;
 }
 
 .Guest-button {
@@ -194,6 +212,10 @@ form::-webkit-scrollbar-thumb {
     font-weight: bold;
     background-color: white;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px;
 }
 
 .Guest-button:hover {
@@ -207,7 +229,8 @@ form::-webkit-scrollbar-thumb {
     align-items: center;
     position: absolute;
     top: 75px;
-    right: 120px;
+    right: 60px;
+    transition: all 0.5s;
 }
 
 .SignupBtn {
@@ -222,6 +245,7 @@ form::-webkit-scrollbar-thumb {
     bottom: 0;
     right: 0;
     z-index: 1;
+    transition: all 0.5s;
 }
 
 .capaImg {
@@ -230,6 +254,8 @@ form::-webkit-scrollbar-thumb {
     position: absolute;
     top: 70px;
     left: 70px;
+    transition: all 0.5s;
+    z-index: 20;
 }
 
 @keyframes logoAnimation {
@@ -282,7 +308,7 @@ form::-webkit-scrollbar-thumb {
 /* Sign-up */
 .sign-up {
     background-color: white;
-    height: 550px;
+    height: fit-content;
     width: 570px;
     border-radius: 15px;
     box-shadow: -2px 0px 6px 0px rgb(0, 0, 0, 0.2);
@@ -291,13 +317,26 @@ form::-webkit-scrollbar-thumb {
     justify-content: center;
     align-items: center;
     z-index: 2;
+    padding-bottom: 20px;
+    transition: all 0.5s;
 }
 
 .arrow-img {
-    position: fixed;
-    margin-top: 60px;
-    margin-left: -150px;
+    position: relative;
+    margin-left: -55px;
     cursor: pointer;
+    top: 60px;
+    transform: scale(0.85);
+}
+
+.forgot-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.forgot-box img {
+    margin-right: 10px;
 }
 
 .arrow-img:hover {
@@ -377,16 +416,17 @@ form::-webkit-scrollbar-thumb {
     margin-bottom: 1px;
 }
 
-.sign-up-privacy:hover{
+.sign-up-privacy:hover {
     transform: scale(1.1);
     text-decoration: underline;
-    
+
 }
+
 /* Sign-up */
 
 .forgot-password-container {
     background-color: white;
-    height: 400px;
+    height: fit-content;
     width: 570px;
     border-radius: 15px;
     box-shadow: -2px 0px 6px 0px rgb(0, 0, 0, 0.2);
@@ -396,6 +436,8 @@ form::-webkit-scrollbar-thumb {
     align-items: center;
     text-align: center;
     z-index: 2;
+    padding-top: 25px;
+    padding-bottom: 25px;
 }
 
 .password-container {
@@ -406,7 +448,6 @@ form::-webkit-scrollbar-thumb {
 
 .password-btn {
     border-radius: 5px;
-    width: 220px;
     height: 42px;
     border: none;
     font-size: 20px;
@@ -415,6 +456,8 @@ form::-webkit-scrollbar-thumb {
     color: white;
     margin-top: 30px;
     cursor: pointer;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .password-btn:hover {
@@ -424,9 +467,7 @@ form::-webkit-scrollbar-thumb {
 
 .password-headline {
     font-size: 40px;
-    margin-bottom: 5px;
-    margin-top: -15px;
-    padding: 0px 50px 0px 50px;
+    margin: 0;
 }
 
 .password-span {
@@ -436,9 +477,7 @@ form::-webkit-scrollbar-thumb {
 }
 
 .password-arrow-img {
-    position: absolute;
-    margin-left: -260px;
-    margin-top: -10px;
+    position: relative;
     cursor: pointer;
 }
 
@@ -446,14 +485,14 @@ form::-webkit-scrollbar-thumb {
     transform: scale(1.2);
 }
 
-.privacy_policy a{
+.privacy_policy a {
     text-decoration: none;
     color: #29ABE2;
     font-size: 15px;
     cursor: pointer;
 }
 
-.privacy_policy a:hover{
+.privacy_policy a:hover {
     transform: scale(1.1);
     text-decoration: underline;
 }
@@ -463,6 +502,7 @@ form::-webkit-scrollbar-thumb {
         top: 50px;
         left: 50px;
         width: 50px;
+        transition: all 0.5s;
     }
 
     @keyframes logoAnimation {
@@ -471,7 +511,7 @@ form::-webkit-scrollbar-thumb {
             left: calc(100vw - 50%);
             scale: 200%;
         }
-    
+
         to {
             top: 50px;
             left: 50px;
@@ -482,14 +522,36 @@ form::-webkit-scrollbar-thumb {
 }
 
 @media (max-width: 600px) {
+
+    .checkbox-sign-up {
+        margin-top: 310px;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 14px;
+        width: 90%;
+    }
+
+    .login-box {
+        flex-wrap: wrap;
+    }
+
     .SignupButton {
-        top: auto;
-        bottom: 72px;
-        left: 50%;
-        transform: translateX(-50%);
-        right: unset;
-        width: 250px;
-        gap: 20px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 80px;
+        right: 0;
+        left: 0;
+        height: 0;
+        width: 100%;
+        gap: 17px;
+        transition: all 0.5s;
+        flex-wrap: wrap;
     }
 
     .footer {
@@ -498,63 +560,102 @@ form::-webkit-scrollbar-thumb {
 
     .SignupBtn {
         margin-right: 0px;
+        transition: all 0.5s;
     }
 
     .login {
-        height: 420px;
-        width: 420px;
+        height: fit-content;
+        width: 100%;
+        margin-left: 5%;
+        margin-right: 5%;
+        transition: all 0.5s;
     }
 
     .sign-up {
-        height: 550px;
-        width: 420px;
+        height: fit-content;
+        width: 100%;
+        padding-bottom: 20px;
+        margin-left: 5%;
+        margin-right: 5%;
+        transition: all 0.5s;
     }
 
-    .forgot-password-container{
-        width: 420px;
+    .forgot-password-container {
+        width: 100%;
+        margin-left: 5%;
+        margin-right: 5%;
     }
 
-    .arrow-img {
-        margin-left: -60px;
+    .forgot-box {
+        margin: 0;
+        margin-left: 10px;
     }
 
-    .password-arrow-img{
-        margin-left: -140px;
-    }
-
-    .forgot-password-container{
-        height: 430px;
-    }
 }
 
 @media (max-width: 440px) {
-    .password-login input {
-        width: 290px;
+    .none {
+        -webkit-transform: scale(0.85);
+        -moz-transform: scale(0.85);
+        -ms-transform: scale(0.85);
+        -o-transform: scale(0.85);
+        transform: scale(0.85);
     }
 
-    .email-login input{
-        width: 290px;
+    .checkbox-sign-up {
+        -webkit-transform: scale(0.85);
+        -moz-transform: scale(0.85);
+        -ms-transform: scale(0.85);
+        -o-transform: scale(0.85);
+        transform: scale(0.85);
+    }
+
+    .arrow-img {
+        margin-left: -40px;
+        top: 60px;
+        transform: scale(0.85);
+    }
+
+    .login-box {
+        gap: 15px;
+    }
+
+    .checkbox {
+        transition: all 0.5s;
+    }
+
+    .checkbox span {
+        font-size: 12px;
+    }
+
+    .password {
+        margin-left: 10px;
+    }
+
+
+    .password-login input {
+        width: 100%;
+
+    }
+
+    .email-login input {
+        width: 100%;
     }
 
     .login {
-        height: 420px;
-        width: 320px;
+        height: fit-content;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        transition: all 0.5s;
     }
 
-    .sign-up {
-        height: 550px;
-        width: 320px;
-    }
 
-    .forgot-password-container{
-        width: 320px;
-    }
 
-    .register-error-message{
+    .register-error-message {
         margin-left: -80px;
     }
 
-    .register-error-message-passwort{
+    .register-error-message-passwort {
         margin-left: -80px;
     }
 
@@ -562,6 +663,7 @@ form::-webkit-scrollbar-thumb {
         top: 25px;
         left: 25px;
         width: 40px;
+        transition: all 0.5s;
     }
 
     @keyframes logoAnimation {
@@ -570,49 +672,35 @@ form::-webkit-scrollbar-thumb {
             left: calc(100vw - 50%);
             scale: 200%;
         }
-    
+
         to {
             top: 25px;
             left: 25px;
         }
     }
 
-    .password-img {
-        background-position: 260px 8px !important;
-    }
-
-    .mail-img {
-        background-position: 260px 8px !important;
-    }
-
     .name-img {
-        background-position: 260px 8px !important;
+        background-position: calc(100% - 5px) 8px !important;
     }
 }
 
-@media (max-width: 380px) {
-    .sign-up {
-        height: 480px;
-        width: 320px;
+@media (min-height: 600px) {
+    .landscape-stop{
+        display: none;
     }
+}
 
-    .sign-up-headline {
-        margin-top: 145px;
-    }
-
-    .arrow-img {
-        margin-top: 160px;
-    }
-
-    .login-button-media{
-        margin-bottom: 95px;
-    }
-
-    @keyframes logoAnimation {
-        from {
-            top: calc(100vh - 50%);
-            left: calc(100vw - 50%);
-            scale: 200%;
-        }
+@media (max-height: 600px) {
+    .landscape-stop{
+        position: fixed;
+        overflow: hidden;
+        background-color: #6C757D;
+        z-index: 99 !important;
+        height: 100%;
+        width: 100%;
+        border-color: #2A3647;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }

@@ -15,17 +15,16 @@ user_name = 'Guest';                                            // Sets the user
 /**
  * This function initializes the summary page
  */
-
-
-
 async function initsummary() {
     await loadUserData();
     checkUserLogin();
     loadFromLocalStorage();
+    loadFromLocalStorageContacts()
     GreetingAfterTime();
     OneStartexecuteOnScreenWidthChange();
     loadSummaryTask();
     clacDateUrgent();
+    createHeaderName();
 }
 
 /** 
@@ -63,7 +62,6 @@ function OneStartexecuteOnScreenWidthChange() {
  * This function calculates the current screen width and outputs it. In addition, a popup is generated as soon as the variable is smaller.
  * 
  */
-
 function executeOnScreenWidthChange() {
     const currentScreenWidth = window.innerWidth;
     if (lastScreenWidth < screenWidthThreshold && currentScreenWidth >= screenWidthThreshold) {
@@ -79,7 +77,6 @@ function executeOnScreenWidthChange() {
  * This function creates a popup with the respective logged in user.
  * 
  */
-
 function showPopupSlider() {
     let text = welcome_text + user_name;
     const popup = document.createElement("div");
@@ -102,7 +99,6 @@ function showPopupSlider() {
 /**
  * This function loads and generates all data from the individual task
  */
-
 function loadSummaryTask() {
     let to_do = loadSummaryCategory('task_board', 'to_do');
     let in_progress = loadSummaryCategory('task_board', 'in_progress');

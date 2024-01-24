@@ -1,3 +1,5 @@
+
+
 /**
  * Toggles the visibility of elements based on their IDs and checks/unchecks the privacy policy checkbox.
  * @param {string} elementId - The ID of the primary element to toggle.
@@ -19,21 +21,6 @@ function toggleCheckmark(elementId, elementIdNone) {
     }
 }
 
-//Bin noch dabei es weiter zu machen
-function checkSite(){
-    if(window.location.pathname.split('/').pop() == 'board.html'){
-      document.getElementById("board").style.backgroundColor = "#091931";
-    }else if(window.location.pathname.split('/').pop() == 'summary.html'){
-      document.getElementById("summary").style.backgroundColor = "#091931";
-    }else if(window.location.pathname.split('/').pop() == 'add_task.html'){
-      document.getElementById("add_task").style.backgroundColor = "#091931";
-    } else if(window.location.pathname.split('/').pop() == 'contacts.html'){
-      document.getElementById("contacts").style.backgroundColor = "#091931";
-    } else if(window.location.pathname.split('/').pop() == 'legal.html'){
-      document.getElementById("legal").style.backgroundColor = "#091931";
-    }
-  }
-  
 /**
  * Toggles the visibility of the signup and login sections.
  * @param {string} action - Determines the action to take, either "show" or "hide".
@@ -66,29 +53,6 @@ function showForgotPassword(mode) {
 }
 
 /**
- * Handles the submit action of the forgot password form and shows a popup upon success.
- */
-function handleForgotPasswordFormSubmit() {
-    let passwordEmail = document.getElementById('passwordEmail');
-    passwordEmail.value = '';
-
-    document.getElementById('forgot-password-container').classList.add('d-none');
-    document.getElementById('password-container').classList.remove('d-none');
-
-    showPopupAndRedirect('Passwort erfolgreich zurückgesetzt', 'index.html');
-
-    return false;
-}
-
-/**
- * Displays a basic alert with the given message.
- * @param {string} message - The message to display in the alert.
- */
-function showPopupAndRedirect(message) {
-    alert(message);
-}
-
-/**
  * Validates if two password fields have the same value.
  * @returns {boolean} Returns true if passwords match, false otherwise.
  */
@@ -97,13 +61,12 @@ function validatePasswords() {
     const password2 = document.getElementById('ForgotPassword2').value;
     const errorMessage = document.getElementById('register-error2');
     if (password1 !== password2) {
-
         showPopup('Your password does not match.')
-        return false; // Verhindert das Absenden des Formulars
+        return false;
     } else {
+        showPopup('The password has been changed')
         errorMessage.style.display = 'none';
-        // Hier wird das Passwort zurückgesetzt
-        return true; // Lässt das Formular absenden
+        return true;
     }
 }
 
@@ -113,7 +76,7 @@ function validatePasswords() {
 function checkUserEmail() {
     let passwordEmail = document.getElementById('passwordEmail').value;
 
-    let user = users.find(u => u.email === passwordEmail);
+    user = users.find(u => u.email === passwordEmail);
     if (user) {
         // Wenn der Benutzer in der Liste gefunden wurde
         document.getElementById('forgot-password-container').classList.add('d-none');
@@ -127,10 +90,10 @@ function checkUserEmail() {
  * Handles the submit action of the forgot password form.
  * @returns {boolean} Always returns false to prevent form submission.
  */
-function handleForgotPasswordFormSubmit() {
+async function handleForgotPasswordFormSubmit() {
+    await loadUsers();
     checkUserEmail();
-
-    return false;
+    //return false;
 }
 
 /**
@@ -138,8 +101,10 @@ function handleForgotPasswordFormSubmit() {
  */
 function checkUserLogin() {
     if (user == undefined) {
-        console.log('fehler')
-        openPage('index.html');
+        openPage('../index.html');
+    }
+    if(user == 'guest'){
+        document.getElementById('guest-login').innerHTML = 'Attention guest user, saving and deleting not allowed.';  
     }
 }
 
@@ -163,13 +128,16 @@ function setGuestUser() {
     localStorage.setItem('user', user);
 }
 
+
+
+
 /**
- * Displays a popup with the given text and optionally redirects to a specified URL.
- * @param {string} text - The message to display in the popup.
- * @param {string} [url] - Optional. The URL to redirect to after the popup disappears.
+ * Displays a popup with the given text and optionally redirects to a specified URL
+ * 
+ * @param {string} text The message to display in the popup.
+ * @param {string} url Optional. The URL to redirect to after the popup disappears.
  */
 function showPopupAndRedirect(text, url) {
-    // Zeige das Popup
     var popup = document.createElement("div");
     popup.textContent = text;
     popup.classList.add("popup");
@@ -181,7 +149,6 @@ function showPopupAndRedirect(text, url) {
         popup.style.top = "-100px";
         setTimeout(function () {
             document.body.removeChild(popup);
-            // Nachdem das Popup verschwunden ist, leite zur angegebenen URL weiter
             if (url) {
                 window.location.href = url;
             }
@@ -214,7 +181,9 @@ function openHTML(html) {
     location.href = html;
 }
 
-// Header
+/** 
+ * Header
+ */
 function userNavbar() {
     let navbar = document.getElementById('navbar');
     if (navbar.classList.contains('d-none')) {
@@ -222,4 +191,29 @@ function userNavbar() {
     } else {
         navbar.classList.add('d-none');
     }
+}
+
+/**
+ * Create Header Name
+ */
+function createHeaderName() {
+    for (let i = 0; i < contacts.length; i++) {
+        const element = contacts[i];
+        if (element.email == user) {
+            document.getElementById('header-icon').innerHTML = element.logogram;
+            document.getElementById('header-icon').style.backgroundColor = element.hex_color;
+        } else if (user == 'guest') {
+            document.getElementById('header-icon').innerHTML = 'GU';
+            document.getElementById('header-icon').style.backgroundColor = '#FFA64E';
+        }
+    }
+}
+
+/**
+ * Load of info page the user
+ */
+async function initHelp() {
+    await loadUserData();
+    loadFromLocalStorageContacts()
+    createHeaderName();
 }

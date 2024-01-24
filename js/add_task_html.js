@@ -52,7 +52,7 @@ function createAddTask(todayDate) {
                 </div>
               </label>
               <label class="task-label"><span>Category<span class="task-star">*</span></span>
-                <select required class="task-input-fd" name="category" id="category" 
+                <select class="task-input-fd" name="category" id="category" 
                 placeholder="Select task category">
                   <option value="" disabled selected>
                     Select task category

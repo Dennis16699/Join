@@ -1,3 +1,6 @@
+/**
+ * This is an includes to integrate the layouts
+ */
 async function includeHTML() {
     let includeElements = document.querySelectorAll('[w3-include-html]');
     for (let i = 0; i < includeElements.length; i++) {
@@ -10,5 +13,6 @@ async function includeHTML() {
             element.innerHTML = 'Page not found';
         }
     }
-    checkSite();
 }
+
+
